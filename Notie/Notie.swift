@@ -27,6 +27,9 @@ open class Notie : UIView {
 
     /// A block to call when the user taps on the right button.
     open var rightButtonAction: NotieAction?
+    
+    // Tap on notification action.
+    open var tapAction: NotieAction?
 
     /// The title of the left button. Default to `OK`.
     open var leftButtonTitle: String = "OK"
@@ -63,6 +66,9 @@ open class Notie : UIView {
 
     /// The text color of the right button. Default to white color.
     open var rightButtonTextColor = UIColor.white
+    
+    /// Whether or not the banner should dismiss itself when the user taps. Defaults to `true`.
+    open var dismissesOnTap = true
     
     /// Whether or not the banner should dismiss itself when the user swipes up. Defaults to `true`.
     open var dismissesOnSwipe = true
@@ -157,6 +163,13 @@ open class Notie : UIView {
         })
     }
     
+    internal func didTap(_ recognizer: UITapGestureRecognizer) {
+        if dismissesOnTap {
+            dismiss()
+        }
+        tapAction?()
+    }
+    
     internal func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
         if dismissesOnSwipe {
             dismiss()
@@ -190,6 +203,7 @@ open class Notie : UIView {
         self.backgroundView.distribution = .fill
         self.backgroundView.spacing = 0
         
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Notie.didTap(_:))))
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Notie.didSwipe(_:)))
         swipe.direction = .up
         self.addGestureRecognizer(swipe)
