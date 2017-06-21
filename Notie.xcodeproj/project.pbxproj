@@ -101,6 +101,7 @@
 				TargetAttributes = {
 					8484326F1BFEC75700B3E98E = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -200,6 +201,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = im.thi.Notie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
