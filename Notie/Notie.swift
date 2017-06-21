@@ -314,11 +314,19 @@ open class Notie : UIView {
     // MARK: Button Handlers
 
     func leftButtonDidTap() {
+        if dismissesOnTap {
+            dismiss()
+        }
+        
         guard let action = self.leftButtonAction else { return }
         action()
     }
 
     func rightButtonDidTap() {
+        if dismissesOnTap {
+            dismiss()
+        }
+        
         guard let action = self.rightButtonAction else { return }
         action()
     }
