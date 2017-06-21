@@ -64,6 +64,9 @@ open class Notie : UIView {
     /// The text color of the right button. Default to white color.
     open var rightButtonTextColor = UIColor.white
     
+    /// Whether or not the banner should dismiss itself when the user swipes up. Defaults to `true`.
+    open var dismissesOnSwipe = true
+    
     public enum buttons: Int{
         case standard = 2
         case single = 1
@@ -153,7 +156,12 @@ open class Notie : UIView {
                 self.removeFromSuperview()
         })
     }
-
+    
+    internal func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
+        if dismissesOnSwipe {
+            dismiss()
+        }
+    }
 
     // MARK: Helpers
 
@@ -181,6 +189,15 @@ open class Notie : UIView {
         self.backgroundView.axis = .vertical
         self.backgroundView.distribution = .fill
         self.backgroundView.spacing = 0
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Banner.didSwipe(_:)))
+        swipe.direction = .up
+        self.addGestureRecognizer(swipe)
+        
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Banner.didSwipe(_:)))
+        swipe.direction = .up
+        addGestureRecognizer(swipe)
     }
 
     fileprivate func configureStatusBarView() {
