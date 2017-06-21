@@ -190,14 +190,9 @@ open class Notie : UIView {
         self.backgroundView.distribution = .fill
         self.backgroundView.spacing = 0
         
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Banner.didSwipe(_:)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Notie.didSwipe(_:)))
         swipe.direction = .up
         self.addGestureRecognizer(swipe)
-        
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Banner.didSwipe(_:)))
-        swipe.direction = .up
-        addGestureRecognizer(swipe)
     }
 
     fileprivate func configureStatusBarView() {
