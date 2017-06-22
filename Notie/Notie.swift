@@ -73,6 +73,9 @@ open class Notie : UIView {
     /// Whether or not the banner should dismiss itself when the user swipes up. Defaults to `true`.
     open var dismissesOnSwipe = true
     
+    /// Update text alignment of message label and input text field.
+    open var textAlignment = NSTextAlignment.center
+    
     public enum buttons: Int{
         case standard = 2
         case single = 1
@@ -250,7 +253,7 @@ open class Notie : UIView {
 
         messageLabel.numberOfLines = 0
         messageLabel.text = self.message
-        messageLabel.textAlignment = .center
+        messageLabel.textAlignment = textAlignment
         messageLabel.textColor = self.messageTextColor
         messageLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
@@ -269,7 +272,7 @@ open class Notie : UIView {
         self.inputField = inputField
         inputField.backgroundColor = self.inputFieldBackgroundColor
         inputField.textColor = self.inputFieldTextColor
-        inputField.textAlignment = .center
+        inputField.textAlignment = textAlignment
         inputField.placeholder = self.placeholder
         inputField.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
 
