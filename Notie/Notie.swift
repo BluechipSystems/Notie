@@ -100,6 +100,8 @@ open class Notie : UIView {
     fileprivate var bottomConstraint: NSLayoutConstraint?
 
     fileprivate var inputField: UITextField?
+    
+    fileprivate let textSideIndent: CGFloat = 16
 
     // MARK: Life Cycle
 
@@ -255,7 +257,8 @@ open class Notie : UIView {
         messageLabel.text = self.message
         messageLabel.textAlignment = textAlignment
         messageLabel.textColor = self.messageTextColor
-        messageLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        messageLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -textSideIndent).isActive = true
+        messageLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: textSideIndent).isActive = true
     }
 
     fileprivate func addInputFieldPadding() {
@@ -263,7 +266,8 @@ open class Notie : UIView {
         self.contentView.addArrangedSubview(padding)
         padding.backgroundColor = self.inputFieldBackgroundColor
         padding.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        padding.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        padding.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -textSideIndent).isActive = true
+        padding.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: textSideIndent).isActive = true
     }
 
     fileprivate func configureInputField() {
