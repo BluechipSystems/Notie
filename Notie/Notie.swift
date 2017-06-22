@@ -100,8 +100,6 @@ open class Notie : UIView {
     fileprivate var bottomConstraint: NSLayoutConstraint?
 
     fileprivate var inputField: UITextField?
-    
-    fileprivate let textSideIndent: CGFloat = 16
 
     // MARK: Life Cycle
 
@@ -250,15 +248,31 @@ open class Notie : UIView {
     }
 
     fileprivate func configureMesasgeView() {
+        let messageStackView = UIStackView()
+        self.contentView.addArrangedSubview(messageStackView)
+        messageStackView.alignment = .leading
+        messageStackView.axis = .horizontal
+        messageStackView.distribution = .fill
+        messageStackView.spacing = 0
+        messageStackView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        
+        let messageLeftIndentView = UIView()
+        messageStackView.addArrangedSubview(messageLeftIndentView)
+        messageLeftIndentView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        messageLeftIndentView.heightAnchor.constraint(equalTo: messageStackView.heightAnchor).isActive = true
+        
         let messageLabel = UILabel()
-        self.contentView.addArrangedSubview(messageLabel)
-
+        messageStackView.addArrangedSubview(messageLabel)
         messageLabel.numberOfLines = 0
         messageLabel.text = self.message
         messageLabel.textAlignment = textAlignment
         messageLabel.textColor = self.messageTextColor
-        messageLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -textSideIndent).isActive = true
-        messageLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: textSideIndent).isActive = true
+        messageLabel.heightAnchor.constraint(equalTo: messageStackView.heightAnchor).isActive = true
+        
+        let messageRightIndentView = UIView()
+        messageStackView.addArrangedSubview(messageRightIndentView)
+        messageRightIndentView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        messageRightIndentView.heightAnchor.constraint(equalTo: messageStackView.heightAnchor).isActive = true
     }
 
     fileprivate func addInputFieldPadding() {
@@ -266,8 +280,7 @@ open class Notie : UIView {
         self.contentView.addArrangedSubview(padding)
         padding.backgroundColor = self.inputFieldBackgroundColor
         padding.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        padding.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -textSideIndent).isActive = true
-        padding.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: textSideIndent).isActive = true
+        padding.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
 
     fileprivate func configureInputField() {
