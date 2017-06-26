@@ -75,7 +75,7 @@ open class Notie : UIView {
     
     /// Update text alignment of message label and input text field.
     open var textAlignment = NSTextAlignment.center
-    
+
     public enum buttons: Int{
         case standard = 2
         case single = 1
@@ -218,8 +218,9 @@ open class Notie : UIView {
     }
 
     fileprivate func configureContentView() {
+        self.addMessageLabelPadding(paddingValue: 4)
         self.configureMesasgeView()
-        self.configureMessageLabelBottomPadding()
+        self.addMessageLabelPadding(paddingValue: 10)
         if self.style == .input {
             self.addInputFieldPadding()
             self.configureInputField()
@@ -240,10 +241,10 @@ open class Notie : UIView {
         self.contentView.spacing = 0
     }
 
-    fileprivate func configureMessageLabelBottomPadding() {
+    fileprivate func addMessageLabelPadding(paddingValue: CGFloat) {
         let padding = UIView()
         self.contentView.addArrangedSubview(padding)
-        padding.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        padding.heightAnchor.constraint(equalToConstant: paddingValue).isActive = true
         padding.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
 
