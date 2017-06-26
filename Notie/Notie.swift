@@ -75,6 +75,9 @@ open class Notie : UIView {
     
     /// Update text alignment of message label and input text field.
     open var textAlignment = NSTextAlignment.center
+    
+    /// Min height of message label. Set to nil in order to remove this constraint
+    open var minMessageLabelHeight: CGFloat? = 50
 
     public enum buttons: Int{
         case standard = 2
@@ -268,6 +271,18 @@ open class Notie : UIView {
         messageLabel.text = self.message
         messageLabel.textAlignment = textAlignment
         messageLabel.textColor = self.messageTextColor
+        
+        if let minMessageLabelHeight = minMessageLabelHeight {
+            let constraint = NSLayoutConstraint(item: messageLabel,
+                                                attribute: .height,
+                                                relatedBy: .greaterThanOrEqual,
+                                                toItem: nil,
+                                                attribute: NSLayoutAttribute.notAnAttribute,
+                                                multiplier: 1.0,
+                                                constant: minMessageLabelHeight)
+            messageLabel.addConstraint(constraint)
+        }
+        
         messageLabel.heightAnchor.constraint(equalTo: messageStackView.heightAnchor).isActive = true
         
         let messageRightIndentView = UIView()
