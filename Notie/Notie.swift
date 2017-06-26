@@ -36,6 +36,12 @@ open class Notie : UIView {
 
     /// The title of the left button. Default to `Cancel`.
     open var rightButtonTitle: String = "Cancel"
+    
+    /// Icon of the left button. Absent by default.
+    open var leftButtonIcon: UIImage?
+    
+    /// Icon of the right button. Absent by default.
+    open var rightButtonIcon: UIImage?
 
     /// The placeholder of the input text field. Default to `nil`.
     open var placeholder: String?
@@ -328,16 +334,18 @@ open class Notie : UIView {
         buttonStack.spacing = 0
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
 
-        let leftButton = UIButton()
+        let leftButton = LeftAlignedIconButton()
         leftButton.backgroundColor = self.leftButtonBackgroundColor
+        leftButton.setImage(leftButtonIcon, for: UIControlState())
         leftButton.setTitleColor(self.leftButtonTextColor, for: UIControlState())
         leftButton.setTitle(self.leftButtonTitle, for: UIControlState())
         leftButton.addTarget(self, action: #selector(Notie.leftButtonDidTap), for: .touchUpInside)
         buttonStack.addArrangedSubview(leftButton)
 
-        let rightButton = UIButton()
+        let rightButton = LeftAlignedIconButton()
         rightButton.backgroundColor = self.rightButtonBackgroundColor
-        leftButton.setTitleColor(self.rightButtonTextColor, for: UIControlState())
+        rightButton.setImage(rightButtonIcon, for: UIControlState())
+        rightButton.setTitleColor(self.rightButtonTextColor, for: UIControlState())
         rightButton.setTitle(self.rightButtonTitle, for: UIControlState())
         rightButton.addTarget(self, action: #selector(Notie.rightButtonDidTap), for: .touchUpInside)
         if self.buttonCount != buttons.single {
