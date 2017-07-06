@@ -11,20 +11,23 @@ import Foundation
 @IBDesignable
 class LeftAlignedIconButton: UIButton {
     private let componentsIndent: CGFloat = 10
+    private let verticalIndent: CGFloat = 8
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         semanticContentAttribute = .forceLeftToRight
         contentHorizontalAlignment = .center
         titleLabel?.textAlignment = .left
         titleEdgeInsets = UIEdgeInsets(top: 0, left: componentsIndent, bottom: 0, right: 0)
-        
-        let titleLabelHeight = titleLabel?.intrinsicContentSize.height ?? 0
-        let imageHeight = imageView?.intrinsicContentSize.height ?? 0
-        let maxHeight = max(titleLabelHeight, imageHeight)
-        let newHeight = maxHeight > 0 ? maxHeight + componentsIndent : 0
-        
-        var newFrame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: newHeight)
-        frame = newFrame;
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        var result = super.intrinsicContentSize
+        result.height += 2 * verticalIndent
+        return result
     }
 }
