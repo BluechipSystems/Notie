@@ -1,8 +1,8 @@
 //
-//  UIButton+MNExtension.swift
+//  LeftAlignedIconButton.swift
 //  Notie
 //
-//  Created by Vlad Vovk on 6/26/17.
+//  Created by Vlad Vovk on 7/6/17.
 //
 //
 
