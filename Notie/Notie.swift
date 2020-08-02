@@ -2,7 +2,7 @@ import UIKit
 
 /// A closure of action to be handled when the user tap one of the buttons.
 @available(iOS 9.0, *)
-public typealias NotieAction = (Void) -> Void
+public typealias NotieAction = () -> Void
 
 /// Notie is a dropdown notification view that presents above the main view controller.
 @available(iOS 9.0, *)
@@ -175,14 +175,14 @@ open class Notie : UIView {
         })
     }
     
-    internal func didTap(_ recognizer: UITapGestureRecognizer) {
+    @objc internal func didTap(_ recognizer: UITapGestureRecognizer) {
         if dismissesOnTap {
             dismiss()
         }
         tapAction?()
     }
     
-    internal func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
+    @objc internal func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
         if dismissesOnSwipe {
             dismiss()
         }
@@ -283,7 +283,7 @@ open class Notie : UIView {
                                                 attribute: .height,
                                                 relatedBy: .greaterThanOrEqual,
                                                 toItem: nil,
-                                                attribute: NSLayoutAttribute.notAnAttribute,
+                                                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                                                 multiplier: 1.0,
                                                 constant: minMessageLabelHeight)
             messageLabel.addConstraint(constraint)
@@ -336,17 +336,17 @@ open class Notie : UIView {
 
         let leftButton = LeftAlignedIconButton()
         leftButton.backgroundColor = self.leftButtonBackgroundColor
-        leftButton.setImage(leftButtonIcon, for: UIControlState())
-        leftButton.setTitleColor(self.leftButtonTextColor, for: UIControlState())
-        leftButton.setTitle(self.leftButtonTitle, for: UIControlState())
+        leftButton.setImage(leftButtonIcon, for: UIControl.State())
+        leftButton.setTitleColor(self.leftButtonTextColor, for: UIControl.State())
+        leftButton.setTitle(self.leftButtonTitle, for: UIControl.State())
         leftButton.addTarget(self, action: #selector(Notie.leftButtonDidTap), for: .touchUpInside)
         buttonStack.addArrangedSubview(leftButton)
 
         let rightButton = LeftAlignedIconButton()
         rightButton.backgroundColor = self.rightButtonBackgroundColor
-        rightButton.setImage(rightButtonIcon, for: UIControlState())
-        rightButton.setTitleColor(self.rightButtonTextColor, for: UIControlState())
-        rightButton.setTitle(self.rightButtonTitle, for: UIControlState())
+        rightButton.setImage(rightButtonIcon, for: UIControl.State())
+        rightButton.setTitleColor(self.rightButtonTextColor, for: UIControl.State())
+        rightButton.setTitle(self.rightButtonTitle, for: UIControl.State())
         rightButton.addTarget(self, action: #selector(Notie.rightButtonDidTap), for: .touchUpInside)
         if self.buttonCount != buttons.single {
              buttonStack.addArrangedSubview(rightButton)
@@ -357,7 +357,7 @@ open class Notie : UIView {
 
     // MARK: Button Handlers
 
-    func leftButtonDidTap() {
+    @objc func leftButtonDidTap() {
         if dismissesOnTap {
             dismiss()
         }
@@ -366,7 +366,7 @@ open class Notie : UIView {
         action()
     }
 
-    func rightButtonDidTap() {
+    @objc func rightButtonDidTap() {
         if dismissesOnTap {
             dismiss()
         }
