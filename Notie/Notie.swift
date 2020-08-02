@@ -339,7 +339,7 @@ open class Notie : UIView {
         leftButton.setImage(leftButtonIcon, for: UIControl.State())
         leftButton.setTitleColor(self.leftButtonTextColor, for: UIControl.State())
         leftButton.setTitle(self.leftButtonTitle, for: UIControl.State())
-        leftButton.addTarget(self, action: #selector(Notie.leftButtonDidTap), for: .touchUpInside)
+        leftButton.addTarget(self, action: #selector(leftButtonDidTap), for: .touchUpInside)
         buttonStack.addArrangedSubview(leftButton)
 
         let rightButton = LeftAlignedIconButton()
@@ -347,7 +347,7 @@ open class Notie : UIView {
         rightButton.setImage(rightButtonIcon, for: UIControl.State())
         rightButton.setTitleColor(self.rightButtonTextColor, for: UIControl.State())
         rightButton.setTitle(self.rightButtonTitle, for: UIControl.State())
-        rightButton.addTarget(self, action: #selector(Notie.rightButtonDidTap), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
         if self.buttonCount != buttons.single {
              buttonStack.addArrangedSubview(rightButton)
         }
